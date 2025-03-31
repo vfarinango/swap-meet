@@ -45,6 +45,20 @@ class Vendor:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     #Jeslyn's practice
     def swap_items(self, other_vendor, my_item, their_item):
         #If the vendor's inventory doesn't contain my_item or the friend's

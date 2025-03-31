@@ -17,8 +17,8 @@
 #version 2 - Using Inheritance
 from swap_meet.item import Item
 class Clothing(Item):
-    def __init__(self,id = None,fabric = None):
-        super().__init__(id)  #when using super, no need to pass in self again
+    def __init__(self,id = None,fabric = None, condition = None):
+        super().__init__(id, condition)  #when using super, no need to pass in self again
         self.fabric = "Unknown" if fabric is None else fabric
 
     def __str__(self):  #override the __str__ in Item class as we need to print in different format

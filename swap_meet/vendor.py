@@ -37,6 +37,7 @@ class Vendor:
     # -----------------------------------------
 
     def swap_first_item(self, other_vendor):
+        #Version 1
         if not self.inventory or not other_vendor.inventory:
             return False
         else:
@@ -50,6 +51,9 @@ class Vendor:
             self.inventory.append(friend_first_item)
 
             return True
+        
+        #Q: Is order matters? Or we can just append whatever is swaped to the end of each vender's inventory list?
+        #version 2 - DRYing up! (Let's discuss)
 
     # -----------------------------------------
     # ------------ Wave 6 ---------------------
@@ -101,4 +105,30 @@ class Vendor:
             If the `Vendor` has no item that matches `their_priority` category, swapping does not happen, and it returns `False`
             If `other_vendor` has no item that matches `my_priority` category, swapping does not happen, and it returns `False`
         """
-        #Your inputs:
+        if not self.inventory or not other_vendor.inventory:
+            return False
+        
+        other_vender_wants = None
+        vender_wants = None
+
+        for item in self.inventory:
+            if item.get_category() == their_priority:
+                #It's important to put the other_vender_wants == None check first
+                #Because "or" operation could potentially eand earlier when the first condition is met
+                if other_vender_wants == None or item.condition > other_vender_wants.condition:
+                    other_vender_wants = item
+
+        for item in other_vendor.inventory:
+            if item.get_category() == my_priority:
+                if vender_wants == None or item.condition > vender_wants.condition:
+                    vender_wants = item
+        #Version 1
+        if not other_vender_wants or not vender_wants:
+            return False
+        self.inventory.remove(other_vender_wants)
+        other_vendor.inventory.append(other_vender_wants)
+        other_vendor.inventory.remove(vender_wants)
+        self.inventory.append(vender_wants)
+        return True
+
+        #Version 2 - DRYing up! (Let's discuss)

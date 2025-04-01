@@ -20,10 +20,6 @@ class Vendor:
         return None
     
     def swap_items(self, other_vendor, my_item, their_item):
-        #other_vendor = the friend the vendor is swapping with
-        # my_item = the item that this vendor will give friend
-        #their_item = the item that friend vendor will give this vendor
-
         if my_item in self.inventory and their_item in other_vendor.inventory:
             self.inventory.remove(my_item)
             other_vendor.inventory.append(my_item)
@@ -34,23 +30,13 @@ class Vendor:
         else:
             return False
 
+
+
     # -----------------------------------------
     # ------------ Wave 4 ---------------------
     # -----------------------------------------
 
     def swap_first_item(self, other_vendor):
-        # Consider the first item in the instance's inventory (self)
-        # and consider the first item in the friend's inventory (other_vendor)
-
-        # Remove the first item from instance's inventory and 
-        # add the friend's first item
-
-        # Remove the first item from the friend's inventory and 
-        # add instance's first item
-
-        #return True
-        #Else return False
-
         if not self.inventory or not other_vendor.inventory:
             return False
         else:

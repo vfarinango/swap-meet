@@ -25,29 +25,18 @@ class Vendor:
         # my_item = the item that this vendor will give friend
         #their_item = the item that friend vendor will give this vendor
 
+        if my_item in self.inventory and their_item in other_vendor.inventory:
+            self.inventory.remove(my_item)
+            other_vendor.inventory.append(my_item)
 
-        #If the vendor's inventory doesn't contain my_item or the friend's
-        #inventory doesn't contain their_item, return False
-
-
-        #Remove my_item from the Vendor's inventory and add it to friend's
-        #Remove their_item from other Vendor's inventory
-        # and adds to this Vendor's inventory, return True
+            other_vendor.inventory.remove(their_item)
+            self.inventory.append(their_item)
+            return True
+        else:
+            return False
 
         
     
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -65,3 +54,36 @@ class Vendor:
         other_vendor.inventory.remove(their_item)
         self.inventory.append(their_item)
         return True
+    
+
+    # -----------------------------------------
+    # ------------ Wave 4 ---------------------
+    # -----------------------------------------
+
+    def swap_first_item(self, other_vendor):
+        # Consider the first item in the instance's inventory (self)
+        # and consider the first item in the friend's inventory (other_vendor)
+
+        # Remove the first item from instance's inventory and 
+        # add the friend's first item
+
+        # Remove the first item from the friend's inventory and 
+        # add instance's first item
+
+        #return True
+        #Else return False
+
+        if not self.inventory or not other_vendor.inventory:
+            return False
+        else:
+            instance_first_item = self.inventory[0]
+            friend_first_item = other_vendor.inventory[0]
+
+            self.inventory.remove(instance_first_item)
+            other_vendor.inventory.append(instance_first_item)
+
+            other_vendor.inventory.remove(friend_first_item)
+            self.inventory.append(friend_first_item)
+
+            return True
+

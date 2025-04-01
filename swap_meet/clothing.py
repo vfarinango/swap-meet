@@ -1,6 +1,6 @@
-#import uuid
+# import uuid
 
-#version 1
+# #version 1
 # class Clothing:
 #     def __init__(self,id = None,fabric = None):
 #         self.id = uuid.uuid4().int if id is None else id

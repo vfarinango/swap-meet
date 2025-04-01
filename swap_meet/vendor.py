@@ -114,7 +114,7 @@ class Vendor:
         for item in self.inventory:
             if item.get_category() == their_priority:
                 #It's important to put the other_vender_wants == None check first
-                #Because "or" operation could potentially eand earlier when the first condition is met
+                #Because "or" operation could potentially end earlier when the first condition is met
                 if other_vender_wants == None or item.condition > other_vender_wants.condition:
                     other_vender_wants = item
 

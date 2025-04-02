@@ -5,6 +5,7 @@ class Electronics(Item):
         super().__init__(id, condition, age)
         self.type = "Unknown" if type is None else type
     
+    
     def __str__(self):
         return f'An object of type Electronics with id {self.id}. This is a {self.type} device.'
         

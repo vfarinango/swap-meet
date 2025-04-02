@@ -1,5 +1,5 @@
 class Vendor:
-    def __init__(self,inventory=None):  #check the slides
+    def __init__(self,inventory=None): 
         self.inventory = [] if inventory is None else inventory
         
     def add(self, item_to_add):
@@ -40,6 +40,8 @@ class Vendor:
         if not self.inventory or not other_vendor.inventory:
             return False
         return self.swap_items(other_vendor, self.inventory[0], other_vendor.inventory[0])
+    
+
 
     # -----------------------------------------
     # ------------ Wave 6 ---------------------
@@ -62,6 +64,7 @@ class Vendor:
                 items_in_category.append(item)
         return items_in_category
     
+
     def get_best_by_category(self,category):
         """
         Gets the item with the highest condition in a certain category.
@@ -86,7 +89,6 @@ class Vendor:
         return highest_condition_item
 
         
-
     def swap_best_by_category(self,other_vendor,my_priority,their_priority):
         """
         Swaps the best item of certain categories with another `Vendor`
@@ -108,7 +110,8 @@ class Vendor:
         return self.swap_items(other_vendor, other_vendor_wants, vendor_wants)
     
 
-#Optional Enhancement
+
+    #Optional Enhancement
     def get_newest(self):
         if not self.inventory:
             return False

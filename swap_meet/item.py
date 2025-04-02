@@ -5,14 +5,16 @@ class Item:
         self.condition = 0 if condition is None else condition
         self.age = 0 if condition is None else age
     
+
     def get_category(self):
         return self.__class__.__name__
     
+
     def __str__(self):
         return f'An object of type Item with id {self.id}.'
     
+    
     def condition_description(self):
-        #I assume condition 5 is the best?
         if self.condition == 5:
             return "New"
         elif self.condition == 4:

@@ -19,13 +19,13 @@ class Vendor:
                 return item
         return None
     
-    def swap_items(self, other_vendor, my_item, their_item):  #use add and remove instance method. self.add(item)/self.remove(item)
+    def swap_items(self, other_vendor, my_item, their_item):  
         if my_item in self.inventory and their_item in other_vendor.inventory:
-            self.inventory.remove(my_item)
-            other_vendor.inventory.append(my_item)
+            self.remove(my_item)
+            other_vendor.add(my_item)
 
-            other_vendor.inventory.remove(their_item)
-            self.inventory.append(their_item)
+            other_vendor.remove(their_item)
+            self.add(their_item)
             return True
         else:
             return False
@@ -37,23 +37,9 @@ class Vendor:
     # -----------------------------------------
 
     def swap_first_item(self, other_vendor):
-        #Version 1
         if not self.inventory or not other_vendor.inventory:
             return False
-        else:
-            instance_first_item = self.inventory[0]
-            friend_first_item = other_vendor.inventory[0]
-
-            self.inventory.remove(instance_first_item)
-            other_vendor.inventory.append(instance_first_item)
-
-            other_vendor.inventory.remove(friend_first_item)
-            self.inventory.append(friend_first_item)
-
-            return True
-        
-        #Q: Is order matters? Or we can just append whatever is swaped to the end of each vender's inventory list?
-        #version 2 - DRYing up! (Let's discuss)
+        return self.swap_items(other_vendor, self.inventory[0], other_vendor.inventory[0])
 
     # -----------------------------------------
     # ------------ Wave 6 ---------------------
@@ -116,30 +102,25 @@ class Vendor:
             If the `Vendor` has no item that matches `their_priority` category, swapping does not happen, and it returns `False`
             If `other_vendor` has no item that matches `my_priority` category, swapping does not happen, and it returns `False`
         """
-        if not self.inventory or not other_vendor.inventory:
-            return False
-        
-        other_vender_wants = None
-        vender_wants = None
+        other_vendor_wants = self.get_best_by_category(their_priority)
+        vendor_wants = other_vendor.get_best_by_category(my_priority)
 
+        return self.swap_items(other_vendor, other_vendor_wants, vendor_wants)
+    
+
+#Optional Enhancement
+    def get_newest(self):
+        if not self.inventory:
+            return False
+
+        newest_item = self.inventory[0]
         for item in self.inventory:
-            if item.get_category() == their_priority:
-                #It's important to put the other_vender_wants == None check first
-                #Because "or" operation could potentially end earlier when the first condition is met
-                if other_vender_wants == None or item.condition > other_vender_wants.condition:
-                    other_vender_wants = item
-
-        for item in other_vendor.inventory:
-            if item.get_category() == my_priority:
-                if vender_wants == None or item.condition > vender_wants.condition:
-                    vender_wants = item
-        #Version 1
-        if not other_vender_wants or not vender_wants:
-            return False
-        self.inventory.remove(other_vender_wants)
-        other_vendor.inventory.append(other_vender_wants)
-        other_vendor.inventory.remove(vender_wants)
-        self.inventory.append(vender_wants)
-        return True
-
-        #Version 2 - DRYing up! (Let's discuss)
+            if item.age < newest_item.age:
+                newest_item = item
+        return newest_item
+    
+    
+    def swap_by_newest(self, other_vendor):
+        newest_item = self.get_newest()
+        other_vendor_newest_item = other_vendor.get_newest()
+        return self.swap_items(other_vendor,newest_item,other_vendor_newest_item)

@@ -1,8 +1,8 @@
 from swap_meet.item import Item
 
 class Decor(Item):
-    def __init__(self,id = None,condition = None, width = None,length = None):
-        super().__init__(id, condition)  
+    def __init__(self,id = None,condition = None, width = None,length = None, age=None):
+        super().__init__(id, condition, age)  
         self.width = 0 if width is None else width
         self.length = 0 if length is None else length
 

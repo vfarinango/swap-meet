@@ -1,8 +1,9 @@
 import uuid
 class Item:
-    def __init__(self,id = None,condition = None):
+    def __init__(self,id = None,condition = None, age=None):
         self.id = uuid.uuid4().int if id is None else id
         self.condition = 0 if condition is None else condition
+        self.age = 0 if condition is None else age
     
     def get_category(self):
         return self.__class__.__name__
@@ -24,4 +25,5 @@ class Item:
             return "Acceptable"
         elif self.condition == 0:
             return "Heavily Used"
+        
     

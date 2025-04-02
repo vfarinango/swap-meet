@@ -65,3 +65,11 @@ def test_items_have_default_age():
 def test_items_have_custom_age():
     item = Item(age=5)
     assert item.age == 5
+
+
+# Additional test for Item id attribute exception handling
+def test_id_exception():
+    #item = Item(id ="aaa")
+    with pytest.raises(TypeError):
+        Item(id ="aaa")
+

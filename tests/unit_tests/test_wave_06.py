@@ -356,9 +356,80 @@ def test_get_newest_item():
     assert newest_item.age == 3
 
 
-    # def test_get_newest_item_none():
+def test_get_newest_item_none():
     # Arrange
+    vendor = Vendor(
+    inventory=[]
+    )
 
     # Act
+    newest_item =  vendor.get_newest()
 
     # Assert
+    assert newest_item == None
+
+def test_swap_by_newest():
+    # Arrange       
+    item_a = Clothing(age=3)
+    item_b = Item(age=5)
+    item_c = Decor(age=9)
+    vendor = Vendor(
+    inventory=[item_a, item_b, item_c]
+    )
+
+    item_d = Clothing(age=3)
+    item_e = Item(age=5)
+    item_f = Decor(age=9)
+    other_vendor = Vendor(
+    inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = vendor.swap_by_newest(other_vendor)
+
+    # Assert
+    assert result == True
+    assert item_d in vendor.inventory
+    assert item_a in other_vendor.inventory
+
+# ------ Additional edge cases tests for swap methods -------------
+
+def test_swap_by_newest_vendr_has_no_inventory():
+    # Arrange       
+    vendor = Vendor(
+    inventory=[]
+    )
+
+    other_vendor = Vendor(
+    inventory=[]
+    )
+
+    # Act
+    result = vendor.swap_by_newest(other_vendor)
+
+    # Assert
+    assert result == False
+    
+def test_swap_by_newest_multiple_items_have_same_age():
+    # Arrange       
+    item_a = Clothing(age=3)
+    item_b = Item(age=3)
+    item_c = Decor(age=9)
+    vendor = Vendor(
+    inventory=[item_b, item_a, item_c]
+    )
+
+    item_d = Clothing(age=5)
+    item_e = Item(age=5)
+    item_f = Decor(age=9)
+    other_vendor = Vendor(
+    inventory=[item_d, item_e, item_f]
+    )
+
+    # Act
+    result = vendor.swap_by_newest(other_vendor)
+
+    # Assert
+    assert result == True
+    assert item_d in vendor.inventory
+    assert item_b in other_vendor.inventory

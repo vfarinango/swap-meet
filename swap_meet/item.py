@@ -1,17 +1,20 @@
 import uuid
 class Item:
-    def __init__(self,id = None,condition = None, age=None):
+    def __init__(self,id=None,condition=0, age=0):
+        if id is not None and not isinstance(id, int):
+            raise TypeError ("id must be an integer")
         self.id = uuid.uuid4().int if id is None else id
-        self.condition = 0 if condition is None else condition
-        self.age = 0 if age is None else age 
+        self.condition = condition 
+        self.age = age 
     
 
     def get_category(self):
-        return self.__class__.__name__
+        #return self.__class__.__name__
+        return "Item"
     
 
     def __str__(self):
-        return f'An object of type Item with id {self.id}.'
+        return f'An object of type {self.get_category()} with id {self.id}.'
     
 
     def condition_description(self):

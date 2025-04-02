@@ -314,3 +314,30 @@ def test_swap_best_by_category_no_other_match_is_false():
     # - That result is falsy
     # - That tai and jesse's inventories are the correct length
     # - That all the correct items are in tai and jesse's inventories
+
+    
+#@pytest.mark.skip
+def test_get_newest_item():
+    # Arrange       
+    item_a = Clothing(age=3)
+    item_b = Item(age=5)
+    item_c = Decor(age=9)
+    vendor = Vendor(
+    inventory=[item_a, item_b, item_c]
+    
+    )
+
+    # Act
+    newest_item = vendor.get_newest()
+
+    # Assert
+    assert newest_item == item_a
+    assert newest_item.age == 3
+
+
+    # def test_get_newest_item_none():
+    # Arrange
+
+    # Act
+
+    # Assert

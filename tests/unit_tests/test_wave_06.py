@@ -336,3 +336,29 @@ def test_swap_best_by_category_no_inventory_is_false():
     assert len(jesse.inventory) == 0
     assert not tai.inventory 
     assert not jesse.inventory
+    
+#@pytest.mark.skip
+def test_get_newest_item():
+    # Arrange       
+    item_a = Clothing(age=3)
+    item_b = Item(age=5)
+    item_c = Decor(age=9)
+    vendor = Vendor(
+    inventory=[item_a, item_b, item_c]
+    
+    )
+
+    # Act
+    newest_item = vendor.get_newest()
+
+    # Assert
+    assert newest_item == item_a
+    assert newest_item.age == 3
+
+
+    # def test_get_newest_item_none():
+    # Arrange
+
+    # Act
+
+    # Assert

@@ -48,16 +48,6 @@ class Vendor:
     # -----------------------------------------
 
     def get_by_category(self, category):
-        """
-        Gets a list of items in a certain category.
-
-        Args:
-            category: a string that represents a category of item
-
-        Returns:
-            It returns a list of objects in the inventory with that category
-            If there are no items in the `inventory` that match the category argument, the method returns an empty list
-        """
         items_in_category = []
         for item in self.inventory:
             if item.get_category() == category:
@@ -66,18 +56,6 @@ class Vendor:
     
 
     def get_best_by_category(self,category):
-        """
-        Gets the item with the highest condition in a certain category.
-        This method looks through the instance's `inventory` for the item with the highest `condition` and matching `category`
-
-        Args:
-            category: a string that represents a category of item
-
-        Returns:
-            It returns this item. The method only returns a single item even if there are duplicates items that have same category and same condition
-            If there are no items in the `inventory` that match the category, it returns `None`
-        """
-
         category_items = self.get_by_category(category)
         if not category_items:
             return None
@@ -90,20 +68,6 @@ class Vendor:
 
         
     def swap_best_by_category(self,other_vendor,my_priority,their_priority):
-        """
-        Swaps the best item of certain categories with another `Vendor`
-        The best item in my inventory that matches `their_priority` category is swapped with the best item in `other_vendor`'s inventory that matches `my_priority`
-
-        Args:
-            other_vendor: represents another `Vendor` instance to trade with
-            my_priority: represents a category that the `Vendor` wants to receive
-            their_priority: represents a category that `other_vendor` wants to receive
-
-        Returns:
-            It returns True.
-            If the `Vendor` has no item that matches `their_priority` category, swapping does not happen, and it returns `False`
-            If `other_vendor` has no item that matches `my_priority` category, swapping does not happen, and it returns `False`
-        """
         other_vendor_wants = self.get_best_by_category(their_priority)
         vendor_wants = other_vendor.get_best_by_category(my_priority)
 

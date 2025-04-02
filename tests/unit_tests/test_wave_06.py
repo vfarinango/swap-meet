@@ -352,7 +352,28 @@ def test_get_newest_item():
     newest_item = vendor.get_newest()
 
     # Assert
-    assert newest_item == item_a
+    assert newest_item is item_a
+    assert newest_item.age == 3
+
+# ----------------------------------------------------------
+# ------ Additional test for optional enhancements ---------
+# ----------------------------------------------------------
+
+def test_get_newest_item_age_order_differently():
+    # Arrange       
+    item_a = Clothing(age=3)
+    item_b = Item(age=5)
+    item_c = Decor(age=9)
+    vendor = Vendor(
+    inventory=[item_b, item_a, item_c]
+    
+    )
+
+    # Act
+    newest_item = vendor.get_newest()
+
+    # Assert
+    assert newest_item is item_a
     assert newest_item.age == 3
 
 
@@ -361,12 +382,11 @@ def test_get_newest_item_none():
     vendor = Vendor(
     inventory=[]
     )
-
     # Act
     newest_item =  vendor.get_newest()
-
     # Assert
     assert newest_item == None
+    
 
 def test_swap_by_newest():
     # Arrange       
@@ -403,7 +423,6 @@ def test_swap_by_newest_vendr_has_no_inventory():
     other_vendor = Vendor(
     inventory=[]
     )
-
     # Act
     result = vendor.swap_by_newest(other_vendor)
 
@@ -425,7 +444,6 @@ def test_swap_by_newest_multiple_items_have_same_age():
     other_vendor = Vendor(
     inventory=[item_d, item_e, item_f]
     )
-
     # Act
     result = vendor.swap_by_newest(other_vendor)
 

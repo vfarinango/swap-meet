@@ -129,7 +129,6 @@ def test_items_have_condition_descriptions_that_are_the_same_regardless_of_type(
     assert one_condition_description != five_condition_description
 
 # ~~~~~ Helper Functions ~~~~~
-
 def check_for_default_uuid_length_id(to_check):
     assert isinstance(to_check.id, int)
     assert len(str(to_check.id)) >= 32

@@ -356,7 +356,7 @@ def test_get_newest_item():
     assert newest_item.age == 3
 
 # ----------------------------------------------------------
-# ------ Additional test for optional enhancements ---------
+# ------ Additional tests for optional enhancements --------
 # ----------------------------------------------------------
 
 def test_get_newest_item_age_order_differently():

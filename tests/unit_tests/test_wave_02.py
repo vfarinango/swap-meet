@@ -55,3 +55,13 @@ def test_get_item_by_id_no_matching():
     assert item_a in items
     assert item_b in items
     assert item_c in items
+
+
+#additional tests
+def test_items_have_default_age():
+    item = Item()
+    assert item.age == 0
+
+def test_items_have_custom_age():
+    item = Item(age=5)
+    assert item.age == 5
